@@ -70,32 +70,32 @@ export default function Dashboard({ setActiveCategory, setActiveTopic, topics })
     if (selectedCategory && selectedSubCategory) {
         const subGroup = groupedTopics.find(g => g.title === selectedSubCategory);
         return (
-            <div className="flex-1 overflow-y-auto custom-scrollbar p-4 lg:p-12 h-full w-full">
-                <div className="w-full space-y-10 pb-20 px-4 md:px-0">
+            <div className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 lg:p-12 h-full w-full">
+                <div className="w-full space-y-6 sm:space-y-10 pb-20 px-2 sm:px-4 md:px-0">
                     <button
                         onClick={() => setSelectedSubCategory(null)}
-                        className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group mb-4"
+                        className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group mb-4 touch-manipulation min-h-[44px]"
                     >
                         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                        <span>Back to {currentCatInfo.title}</span>
+                        <span className="text-sm sm:text-base">Back to {currentCatInfo.title}</span>
                     </button>
 
-                    <header className="pb-8 border-b border-slate-900">
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-3 text-primary-400 font-black uppercase text-[10px] tracking-[0.2em]">
-                                <currentCatInfo.icon className="w-4 h-4" />
+                    <header className="pb-6 sm:pb-8 border-b border-slate-900">
+                        <div className="space-y-3 sm:space-y-4">
+                            <div className="flex items-center gap-2 sm:gap-3 text-primary-400 font-black uppercase text-[9px] sm:text-[10px] tracking-[0.2em]">
+                                <currentCatInfo.icon className="w-3 h-3 sm:w-4 sm:h-4" />
                                 <span>{currentCatInfo.title}</span>
                             </div>
-                            <h2 className="text-3xl md:text-5xl font-black text-white">
+                            <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white">
                                 {selectedSubCategory}
                             </h2>
-                            <p className="text-slate-400 max-w-xl font-light text-sm md:text-base">
+                            <p className="text-slate-400 max-w-xl font-light text-xs sm:text-sm md:text-base">
                                 Exploring {subGroup?.topics.length || 0} specialized topics within this area.
                             </p>
                         </div>
                     </header>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
                         {subGroup?.topics.map((topic, idx) => (
                             <motion.button
                                 key={topic.id}
@@ -136,29 +136,29 @@ export default function Dashboard({ setActiveCategory, setActiveTopic, topics })
     // Sub-Category Grid View
     if (selectedCategory) {
         return (
-            <div className="flex-1 overflow-y-auto custom-scrollbar p-4 lg:p-12 h-full w-full">
-                <div className="w-full space-y-10 pb-20 px-4 md:px-0">
+            <div className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 lg:p-12 h-full w-full">
+                <div className="w-full space-y-6 sm:space-y-10 pb-20 px-2 sm:px-4 md:px-0">
                     <button
                         onClick={() => setSelectedCategory(null)}
-                        className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group mb-4"
+                        className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group mb-4 touch-manipulation min-h-[44px]"
                     >
                         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                        <span>Back to Overview</span>
+                        <span className="text-sm sm:text-base">Back to Overview</span>
                     </button>
 
-                    <header className="pb-8 border-b border-slate-900">
-                        <div className="space-y-4">
-                            <h2 className="text-3xl md:text-5xl font-black text-white flex items-center gap-4">
-                                <currentCatInfo.icon className="w-8 h-8 md:w-12 md:h-12 text-primary-400" />
+                    <header className="pb-6 sm:pb-8 border-b border-slate-900">
+                        <div className="space-y-3 sm:space-y-4">
+                            <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white flex items-center gap-3 sm:gap-4">
+                                <currentCatInfo.icon className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 text-primary-400" />
                                 {currentCatInfo.title}
                             </h2>
-                            <p className="text-slate-400 max-w-xl font-light text-sm md:text-base">
+                            <p className="text-slate-400 max-w-xl font-light text-xs sm:text-sm md:text-base">
                                 {currentCatInfo.desc}
                             </p>
                         </div>
                     </header>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                         {groupedTopics.map((group, idx) => (
                             <motion.button
                                 key={group.title}
@@ -196,23 +196,23 @@ export default function Dashboard({ setActiveCategory, setActiveTopic, topics })
 
     // Default Overview View
     return (
-        <div className="flex-1 overflow-y-auto custom-scrollbar p-4 lg:p-12 h-full w-full">
-            <div className="w-full space-y-12 pb-20 px-4 md:px-0">
+        <div className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 lg:p-12 h-full w-full">
+            <div className="w-full space-y-8 sm:space-y-12 pb-20 px-2 sm:px-4 md:px-0">
                 {/* Hero Section */}
-                <header className="space-y-4 text-center md:text-left">
+                <header className="space-y-3 sm:space-y-4 text-center md:text-left pt-12 lg:pt-0">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-xs font-bold uppercase tracking-wider"
+                        className="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-[10px] sm:text-xs font-bold uppercase tracking-wider"
                     >
-                        <Layout className="w-3 h-3" />
+                        <Layout className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                         <span>Curriculum Dashboard</span>
                     </motion.div>
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-8xl font-black text-white tracking-tight leading-[1.1]"
+                        className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-tight leading-[1.1]"
                     >
                         Mastering <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-primary-400 to-sky-300 drop-shadow-2xl">GenAI</span>
                     </motion.h1>
@@ -220,41 +220,41 @@ export default function Dashboard({ setActiveCategory, setActiveTopic, topics })
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-lg md:text-xl text-slate-400 max-w-2xl font-light leading-relaxed mx-auto md:mx-0"
+                        className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-400 max-w-2xl font-light leading-relaxed mx-auto md:mx-0"
                     >
                         Your comprehensive guide to 173 Generative AI concepts, meticulously curated for deep understanding and interview preparation.
                     </motion.p>
                 </header>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                     {stats.map((stat, idx) => (
                         <motion.div
                             key={stat.label}
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.3 + idx * 0.1 }}
-                            className="glass-panel p-6 rounded-3xl group hover:border-white/20 transition-all cursor-default"
+                            className="glass-panel p-4 sm:p-6 rounded-2xl sm:rounded-3xl group hover:border-white/20 transition-all cursor-default"
                         >
-                            <div className="flex items-center justify-between mb-4">
-                                <div className={`p-3 rounded-2xl ${stat.bg} ${stat.color}`}>
-                                    <stat.icon className="w-6 h-6" />
+                            <div className="flex items-center justify-between mb-3 sm:mb-4">
+                                <div className={`p-2 sm:p-3 rounded-xl sm:rounded-2xl ${stat.bg} ${stat.color}`}>
+                                    <stat.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                                 </div>
-                                <span className="text-3xl md:text-4xl font-black text-white">{stat.count}</span>
+                                <span className="text-2xl sm:text-3xl md:text-4xl font-black text-white">{stat.count}</span>
                             </div>
-                            <h3 className="text-slate-400 font-medium text-sm md:text-base">{stat.label}</h3>
+                            <h3 className="text-slate-400 font-medium text-xs sm:text-sm md:text-base">{stat.label}</h3>
                         </motion.div>
                     ))}
                 </div>
 
                 {/* Categories Section */}
-                <section className="space-y-8">
-                    <div className="flex items-center gap-4">
-                        <h2 className="text-sm font-bold text-white uppercase tracking-widest">Targeted Curriculum</h2>
+                <section className="space-y-6 sm:space-y-8">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                        <h2 className="text-xs sm:text-sm font-bold text-white uppercase tracking-widest">Targeted Curriculum</h2>
                         <div className="flex-1 h-px bg-slate-900/50" />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                         {categories.map((cat, idx) => (
                             <motion.button
                                 key={cat.id}
@@ -262,21 +262,21 @@ export default function Dashboard({ setActiveCategory, setActiveTopic, topics })
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.6 + idx * 0.1 }}
-                                className={`flex flex-col text-left p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-gradient-to-br ${cat.color} ${cat.borderColor} border-2 hover:scale-[1.02] transition-all relative overflow-hidden group h-full`}
+                                className={`flex flex-col text-left p-5 sm:p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] bg-gradient-to-br ${cat.color} ${cat.borderColor} border-2 hover:scale-[1.02] active:scale-[0.98] transition-all relative overflow-hidden group h-full touch-manipulation`}
                             >
-                                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform">
-                                    <cat.icon className="w-24 h-24" />
+                                <div className="absolute top-0 right-0 p-6 sm:p-8 opacity-5 group-hover:scale-110 transition-transform">
+                                    <cat.icon className="w-16 h-16 sm:w-24 sm:h-24" />
                                 </div>
-                                <div className="mb-6 p-4 rounded-2xl bg-white/5 w-fit">
-                                    <cat.icon className="w-8 h-8 text-white" />
+                                <div className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 w-fit">
+                                    <cat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">{cat.title}</h3>
-                                <p className="text-slate-300 font-light text-sm md:text-base leading-relaxed mb-8 flex-1">
+                                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3">{cat.title}</h3>
+                                <p className="text-slate-300 font-light text-xs sm:text-sm md:text-base leading-relaxed mb-6 sm:mb-8 flex-1">
                                     {cat.desc}
                                 </p>
-                                <div className="flex items-center gap-2 text-white font-bold group-hover:translate-x-2 transition-transform text-sm md:text-base">
+                                <div className="flex items-center gap-2 text-white font-bold group-hover:translate-x-2 transition-transform text-xs sm:text-sm md:text-base">
                                     <span>Browse Topics</span>
-                                    <ArrowRight className="w-4 h-4" />
+                                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                                 </div>
                             </motion.button>
                         ))}
@@ -288,9 +288,9 @@ export default function Dashboard({ setActiveCategory, setActiveTopic, topics })
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1 }}
-                    className="pt-12 border-t border-slate-900/50 text-center"
+                    className="pt-8 sm:pt-12 border-t border-slate-900/50 text-center"
                 >
-                    <p className="text-slate-500 italic font-light text-xs md:text-sm">
+                    <p className="text-slate-500 italic font-light text-[10px] sm:text-xs md:text-sm px-4">
                         "The best way to predict the future is to build it." — Generative AI Era 2024
                     </p>
                 </motion.div>

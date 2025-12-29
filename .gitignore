@@ -49,9 +49,6 @@ Thumbs.db
 .AppleDouble
 .LSOverride
 
-# Module Federation
-**/remoteEntry.js.map
-
 # Misc
 .history/
 

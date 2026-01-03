@@ -9,7 +9,6 @@
     "build": "vite build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    // "deploy": "npm run build && aws s3 sync dist/ s3://vamsee-gen-ai --delete",
     "lint": "eslint .",
     "preview": "vite preview"
   },

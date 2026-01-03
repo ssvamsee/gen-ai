@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Layout, CheckCircle, BookOpen, Star, ArrowRight, Zap, Target, Award, ArrowLeft } from 'lucide-react';
 
 const stats = [
-    { label: 'Must Know', count: 98, icon: CheckCircle, color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
+    { label: 'Must Know', count: 99, icon: CheckCircle, color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
     { label: 'Should Know', count: 48, icon: BookOpen, color: 'text-sky-400', bg: 'bg-sky-400/10' },
     { label: 'Nice to Know', count: 27, icon: Star, color: 'text-amber-400', bg: 'bg-amber-400/10' },
 ];

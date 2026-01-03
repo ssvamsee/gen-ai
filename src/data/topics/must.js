@@ -1872,7 +1872,7 @@ print("Configuring AI for maximum predictability.")`
                 'plain_text'
             ],
             alternative_libraries: {
-                pdf: ['pypdf', 'pdfplumber', 'unstructured'],
+                pdf: ['pypdf', 'pdfplumber', 'unstructured', 'llama-parse'],
                 docx: ['python-docx', 'unstructured'],
                 html: ['beautifulsoup4', 'lxml', 'readability-lxml'],
                 markdown: ['markdown', 'mistune'],
@@ -2015,6 +2015,132 @@ def ingest_pipeline(pdf_path):
         ],
 
         tags: ['RAG', 'Data Engineering', 'LLM Systems', 'Production', 'Foundations']
+    },
+    {
+        id: 175,
+        category: 'MUST',
+        sub_category: 'RAG (RETRIEVAL-AUGMENTED GENERATION)',
+        title: 'Data cleaning & normalization',
+
+        short_ref: 'Data cleaning and normalization remove noise, structural artifacts, and sensitive data from raw documents to ensure embeddings represent semantic meaning rather than formatting artifacts.',
+
+        depth_explanation: 'In real-world RAG systems, raw data is almost never model-ready. Documents contain headers, footers, navigation menus, cookie banners, licensing text, broken words from PDFs, Unicode inconsistencies, and sometimes sensitive information such as emails or IDs. If embedded as-is, these artifacts pollute the embedding space, causing irrelevant chunks to cluster together and degrading retrieval precision.\n\nData cleaning focuses on removing non-semantic noise while preserving meaningful structure. Normalization ensures text is represented consistently—Unicode normalization (NFKC), whitespace standardization, and consistent casing reduce silent mismatches where identical words are encoded differently. For HTML, this means extracting main content and discarding layout elements. For PDFs, it means fixing line breaks, hyphenation, and table artifacts.\n\nThis step directly impacts downstream quality: cleaner inputs produce embeddings with higher signal-to-noise ratio, improving recall@k, reducing hallucinations, and stabilizing similarity scores over time. In production, data cleaning is treated as a deterministic, versioned preprocessing stage—not an ad-hoc script.',
+
+        python_context: {
+            libraries: ['beautifulsoup4', 're', 'unicodedata', 'unstructured'],
+
+            alternative_libraries: {
+                document_parsing: ['unstructured', 'pypdf', 'pdfplumber'],
+                html_extraction: ['beautifulsoup4', 'readability-lxml'],
+                text_normalization: ['ftfy'],
+                pii_detection: ['presidio-analyzer']
+            },
+            how_to_use:
+                'Use when: Preparing raw enterprise documents or web data for ingestion into a RAG system.\n' +
+                'Setup: Apply cleaning before chunking and embedding. Use deterministic, repeatable rules.\n' +
+                'Best practice: Normalize Unicode (NFKC), standardize whitespace, and remove boilerplate consistently across all data sources.\n' +
+                'Common pitfall: Over-cleaning that removes semantic structure (headings, lists) needed for effective chunking.',
+
+            code_breakdown: [
+                {
+                    term: 'BeautifulSoup',
+                    definition: 'Parses HTML/XML to extract main text content while removing scripts, navigation, and layout noise.'
+                },
+                {
+                    term: 're.sub',
+                    definition: 'Regex-based replacement used to remove or mask predictable noise patterns such as emails, IDs, or boilerplate text.'
+                },
+                {
+                    term: 'unicodedata.normalize',
+                    definition: 'Converts text to a canonical Unicode form so semantically identical characters are embedded consistently.'
+                }
+            ]
+        },
+
+        code_samples: [
+            {
+                filename: 'clean.py',
+                code: `import re
+import unicodedata
+from bs4 import BeautifulSoup
+
+def clean_content(raw_html: str) -> str:
+    # Strip HTML structure
+    soup = BeautifulSoup(raw_html, "html.parser")
+    text = soup.get_text(separator=" ")
+
+    # Normalize Unicode
+    text = unicodedata.normalize("NFKC", text)
+
+    # Mask email PII
+    text = re.sub(
+        r'\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\\b',
+        '[EMAIL]',
+        text
+    )
+
+    # Normalize whitespace
+    text = re.sub(r'\\s+', ' ', text).strip()
+    return text
+
+html = "<div>Contact us at support@example.com</div>"
+print(clean_content(html))`
+            }
+        ],
+
+        shortcut: 'Remove noise → Normalize text → Protect data',
+
+        examples: [
+            'Stripping navigation menus and cookie banners from web pages.',
+            'Fixing broken words and line wraps from PDF extraction.',
+            'Masking emails and phone numbers before embedding.',
+            'Normalizing Unicode to prevent silent retrieval mismatches.',
+            'Ensuring consistent whitespace for stable chunk boundaries.'
+        ],
+
+        failure_modes: [
+            'Removing headings that encode important semantic hierarchy.',
+            'Inconsistent cleaning rules across data sources.',
+            'Embedding PII due to incomplete masking.',
+            'Allowing boilerplate text to dominate similarity scores.'
+        ],
+
+        interview_traps: [
+            'Claiming modern embedding models are robust to noisy input.',
+            'Treating cleaning as optional or one-off.',
+            'Assuming HTML-to-text conversion is sufficient preprocessing.'
+        ],
+
+        production_gotchas: [
+            'Cleaning logic must be versioned and reproducible.',
+            'Changing cleaning rules requires re-indexing.',
+            'Over-cleaning can reduce recall even if precision improves.',
+            'PII mistakes are irreversible once embedded.'
+        ],
+
+        metrics_to_watch: [
+            'Noise-to-signal ratio before vs after cleaning.',
+            'Recall@k changes after preprocessing.',
+            'Embedding similarity stability for known pairs.',
+            'Percentage of masked sensitive tokens.'
+        ],
+
+        interview_questions: [
+            {
+                question: 'Why does data cleaning significantly impact RAG quality?',
+                answer: 'Because embeddings encode everything they see. Noise dilutes semantic meaning, causing irrelevant chunks to cluster and lowering retrieval precision.'
+            },
+            {
+                question: 'How do you prevent PII leakage in RAG?',
+                answer: 'By detecting and masking PII during ingestion before embeddings are generated, ensuring sensitive data never enters the vector store.'
+            },
+            {
+                question: 'Can over-cleaning hurt a RAG system?',
+                answer: 'Yes. Removing semantic structure like headings or lists can reduce context clarity and harm retrieval accuracy.'
+            }
+        ],
+
+        tags: ['RAG', 'Data Cleaning', 'Normalization', 'Ingestion', 'Production']
     },
     {
         id: 47,

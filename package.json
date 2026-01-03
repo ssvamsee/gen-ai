@@ -7,10 +7,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    // "deploy": "npm run build && aws s3 sync dist/ s3://vamsee-gen-ai --delete",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "dependencies": {
     "body-parser": "^2.2.1",
@@ -27,8 +28,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@originjs/vite-plugin-federation": "^1.4.1",
     "@tailwindcss/postcss": "^4.1.18",
-    "gh-pages": "^6.2.0",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",

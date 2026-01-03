@@ -43,9 +43,9 @@ export default function TopicDetail({ topic, setActiveTopic }) {
     };
 
     return (
-        <div className="flex-1 overflow-hidden flex flex-col lg:flex-row h-full">
+        <div className="flex-1 flex flex-col lg:flex-row lg:h-full lg:overflow-hidden">
             {/* Left Column: Documentation / Prose */}
-            <div className="flex-1 overflow-y-auto custom-scrollbar p-6 lg:p-12">
+            <div className="flex-1 lg:overflow-y-auto custom-scrollbar p-6 lg:p-12 min-h-fit">
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -54,10 +54,10 @@ export default function TopicDetail({ topic, setActiveTopic }) {
                     {/* Back Button */}
                     <button
                         onClick={() => setActiveTopic(null)}
-                        className="flex items-center gap-2 text-slate-500 hover:text-white transition-all group"
+                        className="flex items-center gap-2 text-slate-500 hover:text-white transition-all group w-fit"
                     >
                         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                        <span className="text-xs font-bold uppercase tracking-widest">Back to Dashboard</span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em]">Back to Dashboard</span>
                     </button>
 
                     {/* Header */}
@@ -101,8 +101,8 @@ export default function TopicDetail({ topic, setActiveTopic }) {
                             </h2>
                             <div className="flex-1 h-px bg-primary-900/30" />
                         </div>
-                        <div className="p-6 rounded-2xl bg-primary-500/5 border border-primary-500/10 relative">
-                            <p className="text-xl text-white font-medium leading-relaxed">
+                        <div className="p-5 md:p-6 rounded-2xl bg-primary-500/5 border border-primary-500/10 relative">
+                            <p className="text-lg md:text-xl text-white font-medium leading-relaxed">
                                 {formatText(topic.short_ref)}
                             </p>
                         </div>
@@ -316,12 +316,12 @@ export default function TopicDetail({ topic, setActiveTopic }) {
             </div>
 
             {/* Right Column: Technical Implementation */}
-            <div className="w-full lg:w-[45%] border-t lg:border-t-0 lg:border-l border-slate-900 bg-slate-950/30 flex flex-col relative overflow-y-auto custom-scrollbar pb-32">
+            <div className="w-full lg:w-[45%] border-t lg:border-t-0 lg:border-l border-slate-900 bg-slate-950/30 flex flex-col relative lg:overflow-y-auto custom-scrollbar pb-32 min-h-fit">
                 <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="p-6 lg:p-10 space-y-10"
+                    className="p-6 md:p-10 space-y-10"
                 >
                     {/* Header Label */}
                     <div className="flex items-center gap-3 text-primary-400 font-black uppercase text-[10px] tracking-[0.2em] mb-4">

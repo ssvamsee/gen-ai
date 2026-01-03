@@ -148,9 +148,9 @@ export default function Dashboard({ setActiveCategory, setActiveTopic, topics })
 
                     <header className="pb-8 border-b border-slate-900">
                         <div className="space-y-4">
-                            <h2 className="text-3xl md:text-5xl font-black text-white flex items-center gap-4">
-                                <currentCatInfo.icon className="w-8 h-8 md:w-12 md:h-12 text-primary-400" />
-                                {currentCatInfo.title}
+                            <h2 className="text-3xl md:text-5xl font-black text-white flex items-center gap-4 flex-wrap">
+                                <currentCatInfo.icon className="w-8 h-8 md:w-12 md:h-12 text-primary-400 shrink-0" />
+                                <span className="break-words">{currentCatInfo.title}</span>
                             </h2>
                             <p className="text-slate-400 max-w-xl font-light text-sm md:text-base">
                                 {currentCatInfo.desc}
@@ -212,7 +212,7 @@ export default function Dashboard({ setActiveCategory, setActiveTopic, topics })
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-8xl font-black text-white tracking-tight leading-[1.1]"
+                        className="text-4xl sm:text-6xl md:text-8xl font-black text-white tracking-tight leading-[1.1] break-words"
                     >
                         Mastering <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-primary-400 to-sky-300 drop-shadow-2xl">GenAI</span>
                     </motion.h1>
@@ -222,7 +222,7 @@ export default function Dashboard({ setActiveCategory, setActiveTopic, topics })
                         transition={{ delay: 0.2 }}
                         className="text-lg md:text-xl text-slate-400 max-w-2xl font-light leading-relaxed mx-auto md:mx-0"
                     >
-                        Your comprehensive guide to 173 Generative AI concepts, meticulously curated for deep understanding and interview preparation.
+                        Your comprehensive guide to 175 Generative AI concepts, meticulously curated for deep understanding and interview preparation.
                     </motion.p>
                 </header>
 
